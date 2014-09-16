@@ -152,13 +152,9 @@ li > pre {
     margin: 0.3em 0;
 }
 a {
-    text-decoration: none;
     color: #12679b;
-    border-bottom: #77addf solid 1px;
-    margin-bottom: -1px;
     }
     a:hover {
-        color:#3c5770;
-        border-bottom-color: #12679b;
+        color: #77addf;
     }
 
