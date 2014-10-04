@@ -6,9 +6,17 @@ body {
     font-family: 'Droid Serif';
     font-size: 14px;
     line-height: 1.3;
+    padding-top: 40px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 }
+input, textarea, select { font-size: 18px; }
 
-
+.small, .small .remark-slide-content { font-size: 18px; }
+.small .demo { font-size: 18px; }
+.small .remark-code { font-size: 16px; }
+.small input, .small textarea, .small select { font-size: 16px; }
 /* Tamplate header */
 
 header {
@@ -16,6 +24,11 @@ header {
     padding: 8px 30px;
     color: #fff;
     overflow: hidden;
+    margin-top: -40px;
+    height: 40px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
     }
     .epam-logo {
         float: right;
