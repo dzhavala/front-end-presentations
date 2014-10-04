@@ -34,8 +34,8 @@ Front-end training
 Styles are a collection of settings that control the appearance and position of the elements of a Web page.
 
 The types of styles:
-- a browser’s style 
-- an author’s style 
+- a browser’s style
+- an author’s style
 - a user’s styles
 
 
@@ -43,7 +43,7 @@ The types of styles:
 ---
 
 
-# Benefits of styles 
+# Benefits of styles
 
 - The separation of code and design;
 - Different design for different devices;
@@ -73,7 +73,7 @@ example-1.html:
    <p>Content</p>
  </body>
 </html>
-``` 
+```
 ].col-40[
 style.css:
 ``` css
@@ -110,10 +110,10 @@ example-2.html:
   <meta charset="utf-8">
   <title>Global styles</title>
   <style>
-   h1 { 
-    font-size: 120%; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
-    color: #333366; 
+   h1 {
+    font-size: 120%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #333366;
    }
   </style>
  </head>
@@ -179,7 +179,7 @@ example-4.html:
    <p>Content</p>
  </body>
 </html>
-``` 
+```
 ].col-40[
 style-1.css:
 ``` css
@@ -218,13 +218,13 @@ All described methods of using CSS can be used either alone or in combination wi
 
 # Device types
 
-- `all` - All types. This value is used by default. 
-- `aural` - speech synthesizers, as well as programs to reproduce text aloud (speech browsers). 
-- `braille` - devices based on a system of signage that are designed for blind people. 
-- `handheld`- handheld computers and similar devices. 
-- `print` - printer. 
-- `projection` - projector. 
-- `screen` - the screen. 
+- `all` - All types. This value is used by default.
+- `aural` - speech synthesizers, as well as programs to reproduce text aloud (speech browsers).
+- `braille` - devices based on a system of signage that are designed for blind people.
+- `handheld`- handheld computers and similar devices.
+- `print` - printer.
+- `projection` - projector.
+- `screen` - the screen.
 - `tv` - TV.
 
 
@@ -243,7 +243,7 @@ All described methods of using CSS can be used either alone or in combination wi
     @import "/style/main.css" screen; /* Style for output to monitor */
     @import "/style/smart.css" print, handheld; /* Style Print and Smartphone */
   </style>
- </head> 
+ </head>
  <body>
   <p>...</p>
  </body>
@@ -274,8 +274,8 @@ All described methods of using CSS can be used either alone or in combination wi
     }
    }
   </style>
- </head> 
- <body>  
+ </head>
+ <body>
   <p>...</p>
  </body>
 </html>
@@ -292,7 +292,7 @@ All described methods of using CSS can be used either alone or in combination wi
   <meta charset="utf-8">
   <title>Devices</title>
   <link media="print, handheld" rel="stylesheet" href="print.css">
-  <link media="screen" rel="stylesheet" href="main.css"> 
+  <link media="screen" rel="stylesheet" href="main.css">
  </head>
  <body>
   <p>...</p>
@@ -310,9 +310,9 @@ All described methods of using CSS can be used either alone or in combination wi
 
 Syntax:
 ``` css
-h1 { 
+h1 {
   color: #a6780a;
-  font-weight: normal; 
+  font-weight: normal;
 }
 ```
 
@@ -324,10 +324,10 @@ p { color: red; }
 
 Comments in CSS-file:
 ``` css
- /* 
+ /*
   Style is designed for introductory purposes
  */
-  
+
 div {
   width: 200px; /* a width of the block */
 }
@@ -341,46 +341,46 @@ div {
 
 .columns[.col-50[
 
-Strings: 
+Strings:
 ``` css
 li:before {content: 'Hello'}
 ```
 
-Numbers: 
+Numbers:
 ``` css
 p {
   font-weight: 600; line-height: 1.2;
-} 
+}
 ```
 
-Percentages: 
+Percentages:
 ``` css
 table {width: 100%;}
 ```
 
-URLs: 
+URLs:
 ``` css
 a { background: url(warn.png) no-repeat }
 ```
 
-Keywords 
+Keywords
 ``` css
 p { text-align: right; }
 ```
 
 ].col-50[
 
-Color: 
+Color:
 - By hexadecimal values: `#6609CF, #fc0`
 - By name: `white, silver, gray, black, red, orange, ...`
 - RGB:  `rgb(255, 0, 0)`
-- RGBA: `rgba(0,255,0,0.3)` 
-- HSL:  `hsl(120,100%, 25%)` 
+- RGBA: `rgba(0,255,0,0.3)`
+- HSL:  `hsl(120,100%, 25%)`
 - HSLA: `hsla(120,100%, 50%, 0.3)`
 
-Dimensions. Relative units: 
+Dimensions. Relative units:
 ``` css
-em, rem, ex, px, % 
+em, rem, ex, px, %
 ```
 Dimensions. Absolute units:
 ``` css
@@ -395,7 +395,7 @@ in, cm, mm, pt, pc
 
 ``` css
 <style>
-p { 
+p {
   text-align: right;
   color: green;
 }
@@ -406,7 +406,7 @@ p {
 
 .demo.demo-1[
 <style>
-.demo-1 p { 
+.demo-1 p {
   text-align: right;
   color: green;
 }
@@ -420,12 +420,12 @@ p {
 # Selectors. Classes
 ``` html
 <style>
-   p { text-align: justify; } 
+   p { text-align: justify; }
    p.cite {
     margin-left: 20px;
     border-left: 1px solid navy;
     padding-left: 15px;
-   } 
+   }
    .article { font-size: 11px; }
 </style>
 
@@ -437,15 +437,15 @@ p {
 .demo.demo-2[
 <style>
   .demo-2 p {
-    font-size: 16px; 
+    font-size: 16px;
     text-align: justify;
     margin: 0 0 .7rem;
-   } 
+   }
   .demo-2 p.cite {
     margin-left: 20px;
     border-left: 1px solid navy;
     padding-left: 15px;
-   } 
+   }
   .demo-2 .article {
       font-size: 11px;
    }
@@ -505,7 +505,7 @@ p {
   a {
     color: red;
   }
-  div b { 
+  div b {
     font-family: Times, serif;
   }
 
@@ -517,7 +517,7 @@ p {
   .main-nav li {
     margin: 0 0 10px 0;
     padding: 3px;
-    background: #fc0;  
+    background: #fc0;
   }
   .main-nav a {
     color: #000;
@@ -631,10 +631,11 @@ p {
 
 ``` html
 <style>
+
 q[title] {
   color: maroon;
 }
-a[target="_blank"] { 
+a[target="_blank"] {
   background: #ccc;
   padding-left: 15px;
 }
@@ -650,7 +651,7 @@ a[target="_blank"] {
 .demo-5 q[title] {
   color: maroon;
 }
-.demo-5 a[target="_blank"] { 
+.demo-5 a[target="_blank"] {
   background: #ccc;
   padding-left: 15px;
 }
@@ -671,21 +672,21 @@ a[target="_blank"] {
 .columns[.col-60[
 ``` css
 /* Attribute value starts with some text */
-a[href^="http://" ] { 
-  font-weight: bold 
+a[href^="http://" ] {
+  font-weight: bold
 }
 /* If link ends with ".ru" */
-a[href$=".com"] { 
+a[href$=".com"] {
   background: #fc0;
 }
 /* If link contains "google" */
-[href*="google"] { 
+[href*="google"] {
   background: yellow;
 }
 /* One of the several attribute values */
-[title~="block"] { 
+[title~="block"] {
   color: green;
-} 
+}
 ```
 ].col-40.demo.demo-6[
 <!-- hardcoded style values here due to markdown quotes escaping bug -->
@@ -708,19 +709,19 @@ a[href$=".com"] {
 # Pseudoclasses
 
 ``` css
- a:link { 
+ a:link {
   color: #036; /* The color of not visited links */
  }
- a:hover { 
+ a:hover {
   color: #f00; /* The color of links on mouse pointer hovering */
  }
- a:visited { 
+ a:visited {
   color: #606; /* The color of visited links */
  }
  a:visited:hover {
   color: #303; /* The color of not visited links on hover */
  }
- a:active { 
+ a:active {
   color: #ff0; /* The color of active links */
  }
  b:first-child {
@@ -746,19 +747,19 @@ a[href$=".com"] {
 &nbsp;
 .demo[
 <style>
- a:link { 
+ a:link {
   color: #036; /* The color of not visited links */
  }
- a:hover { 
+ a:hover {
   color: #f00; /* The color of links on mouse pointer hovering */
  }
- a:visited { 
+ a:visited {
   color: #606; /* The color of visited links */
  }
  a:visited:hover {
   color: #303; /* The color of not visited links on hover */
  }
- a:active { 
+ a:active {
   color: #ff0; /* The color of active links */
  }
  b:first-child {
@@ -827,11 +828,11 @@ a[href$=".com"] {
 # Grouping
 
 ``` css
-h1, h2, h3 { 
-  font-family: Arial, Helvetica, sans-serif; 
-} 
-h1 { 
-  font-size: 160%; 
+h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 160%;
   color: #003;
 }
 ```
