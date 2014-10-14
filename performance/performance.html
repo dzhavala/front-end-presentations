@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Performance optimization</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="../assets/css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<header>
+		<img class="epam-logo" src="../assets/img/logo.png"/>
+		<h1>Performance optimization</h1>
+	</header>
+
+<!-- ================== Slides ================== -->
+	<textarea id="source">
+
+
+class: center, middle
+
+.title[
+Front-end training
+# Performance optimization
+]
+
+
+---
+
+
+layout: true
+
+# Constructing the Object Model
+
+Before the browser can render the page it needs to construct the DOM and CSSOM trees. As a result, we need to ensure that we deliver both the HTML and CSS to the browser as quickly as possible.
+
+
+---
+
+
+### Simple DOM example:
+
+``` html 
+	<html>
+		<head>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0">
+			<link href="style.css" rel="stylesheet">
+			<title>Critical Path</title>
+		</head>
+		<body>
+			<p>Hello <span>web performance</span> students!</p>
+			<div><img src="awesome-photo.jpg"></div>
+		</body>
+	</html>
+```
+
+
+---
+
+
+.img-wrap-80[![DOM example screenshot](../assets/img/performance-optimization/simple-dom-example.png)]
+
+
+---
+
+
+layout: false 
+
+# Render-tree construction, Layout, and Paint
+
+### All the steps the browser went through:
+
+<ol>
+	<li>Process HTML markup and build the DOM tree.</li>
+	<li>Process CSS markup and build the CSSOM tree.</li>
+	<li>Combine the DOM and CSSOM into a render tree.</li>
+	<li>Run layout on the render tree to compute geometry of each node.</li>
+	<li>Paint the individual nodes to the screen.</li>
+</ol>
+
+
+
+---
+
+layout: true
+
+# Render Blocking CSS
+
+
+---
+
+
+CSS is a render blocking resource, get it down to the client as soon and as quickly as possible to optimize the time to first render!
+
+
+.columns[.col-50[
+	.center[With CSS:]
+	.img-wrap-60[![NYT with css](../assets/img/performance-optimization/css-render-blocking-with-css.png)]
+].col-50[
+	.center[Without CSS:]
+	.img-wrap-60[![NYT without css](../assets/img/performance-optimization/css-render-blocking-without-css.png)]
+]]
+
+
+---
+
+
+### Use CSS media queries for responsiveness!
+
+CSS “media types” and “media queries” allow us to address these use-cases:
+
+``` html
+	<link href="style.css"    rel="stylesheet">
+	<link href="style.css"    rel="stylesheet" media="screen">
+	<link href="portrait.css" rel="stylesheet" media="orientation:portrait">
+	<link href="print.css"    rel="stylesheet" media="print">
+```
+
+---
+
+layout: false
+
+# Adding Interactivity with JavaScript
+
+JavaScript allows us to modify just about every aspect of the page: content, styling, and its behavior to user interactions.
+
+--
+
+However, there is a big performance caveat lurking underneath. JavaScript affords us a lot of power, but it also creates a lot of additional limitations on how and when the page is rendered. If we move the script above the span element, you’ll notice that the script will fail and complain that it cannot find a reference to any span elements in the document.
+
+```javascript
+	getElementsByTagName(‘span’); // --> null
+```
+
+--
+
+### To add interactivity use this hacks:
+
+- Parser Blocking
+- Asynchronous JavaScript
+
+
+---
+
+
+# Measuring the Critical Rendering Path with Navigation Timing
+
+You can't optimize what you can't measure. Thankfully, the Navigation Timing API gives us all the necessary tools to measure each step of the critical rendering path!
+
+.img-wrap-60[![Dom timing](../assets/img/performance-optimization/dom-navtiming.png)]
+
+[Example](./assets/critical-path-measure.html)
+
+
+---
+
+layout: true
+
+# Analyzing Critical Rendering Path Performance
+
+---
+
+### The Hello World experience
+
+```html
+	<html>
+		<head>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0">
+			<title>Critical Path: No Style</title>
+		</head>
+		<body>
+			<p>Hello <span>web performance</span> students!</p>
+			<div><img src="awesome-photo.jpg"></div>
+		</body>
+	</html>
+```
+
+.img-wrap-100[![Dom timing](../assets/img/performance-optimization/waterfall-dom.png)]
+
+---
+
+### Adding JavaScript and CSS into the mix
+
+```html
+	<html>
+		<head>
+			<title>Critical Path: Measure Script</title>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0">
+			<link href="style.css" rel="stylesheet">
+		</head>
+		<body onload="measureCRP()">
+			<p>Hello <span>web performance</span> students!</p>
+			<div><img src="awesome-photo.jpg"></div>
+			<script src="timing.js"></script>
+		</body>
+	</html>
+```
+.img-wrap-100[![Dom timing](../assets/img/performance-optimization/waterfall-dom-after.png)]
+
+
+---
+
+
+layout: false
+
+# Optimizing the Critical Rendering Path
+
+### The general sequence of steps to optimize the critical rendering path is:
+
+<ol>
+	<li>Analyze and characterize your critical path: number of resources, bytes, length.</li>
+	<li>Minimize number of critical resources: eliminate them, defer their download, mark them as async, etc.</li>
+	<li>Optimize the order in which the remaining critical resources are loaded: you want to download all critical assets as early as possible to shorten the critical path length.</li>
+	<li>Optimize the number of critical bytes to reduce the download time (number of roundtrips).</li>
+</ol>
+
+
+---
+
+# Eliminating unnecessary downloads
+
+The fastest and best optimized resource is a resource not sent. Have you audited your resources recently? You should, and you should do so periodically to ensure that each resource is helping deliver a better user experience.
+
+- Inventory all own and third party assets on your pages
+- Measure the performance of each asset: its value and its technical performance
+- Determine if the resources are providing sufficient value
+
+
+---
+
+layout: true
+
+# Optimizing encoding and transfer size of text-based assets
+
+---
+
+### Data compression 101
+
+- Compression is the process of encoding information using fewer bits
+- Eliminating unnecessary data always yields the best results
+- There are many different compression techniques and algorithms
+- You will need a variety of techniques to achieve the best compression
+
+---
+
+### Minification: preprocessing & context-specific optimizations
+
+```html
+	<html>
+		<head>
+		<style>
+			 /* awesome-container is only used on the landing page */
+			 .awesome-container { font-size: 120% }
+			 .awesome-container { width: 50% }
+		</style>
+	 </head>
+	 <body>
+		 <!-- awesome container content: START -->
+			<div>…</div>
+		 <!-- awesome container content: END -->
+		 <script>
+			 awesomeAnalytics(); // beacon conversion metrics
+		 </script>
+	 </body>
+	</html>
+```
+
+---
+
+### Minification: preprocessing & context-specific optimizations
+
+Result of minification:
+
+```html
+<html><head><style>.awesome-container{font-size:120%;width: 50%}
+    </style></head><body><div>…</div><script>awesomeAnalytics();
+    </script></body></html>
+```
+
+---
+
+layout: false
+
+### Text compression with GZIP
+
+- GZIP performs best on text-based assets: CSS, JavaScript, HTML
+- All modern browsers support GZIP compression and will automatically request it
+- Your server needs to be configured to enable GZIP compression
+- Some CDNs require special care to ensure that GZIP is enabled
+
+--
+
+.img-wrap-100[![Dom timing](../assets/img/performance-optimization/gzip-transfer-vs-actual-size.png)]
+
+
+---
+
+layout: true
+
+# Image optimization
+
+---
+
+### Eliminating and replacing images
+
+- Eliminate unnecessary image resources
+- Leverage CSS3 effects where possible
+- Use web fonts instead of encoding text in images
+
+---
+
+### Vector vs. Raster images
+
+- Vector images are ideal for images that consist of geometric shapes
+- Vector images are zoom and resolution-independent
+- Raster images should be used for complex scenes with lots of irregular shapes and details
+
+--
+
+.columns[.col-50[
+	.img-wrap-80[![vector-zoom](../assets/img/performance-optimization/vector-zoom.png)]
+].col-50[
+	.img-wrap-80[![raster-zoom](../assets/img/performance-optimization/raster-zoom.png)]
+]]
+
+---
+
+### Implications of high-resolution screens
+
+- High resolution screens have multiple device pixels per CSS pixel
+- High resolution images require significantly higher number of pixels and bytes
+- Image optimization techniques are the same regardless of resolution
+
+.img-wrap-80[![](../assets/img/performance-optimization/css-vs-device-pixels.png)]
+
+---
+
+### Optimizing vector images
+
+- SVG is an XML-based image format
+- SVG files should be minified to reduce their size
+- SVG files should be compressed with GZIP
+
+```html
+	<?xml version="1.0" encoding="utf-8"?>
+	<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+	<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	   x="0px" y="0px" viewBox="0 0 612 792" xml:space="preserve">
+	<g id="XMLID_1_">
+	  <g>
+	    <circle fill="red" stroke="black" stroke-width="2" stroke-miterlimit="10" cx="50" cy="50" r="40"/>
+	  </g>
+	</g>
+	</svg>
+```
+
+---
+
+### Optimizing raster images
+
+- A raster image is a grid of pixels
+- Each pixel encodes color and transparency information
+- Image compressors use a variety of techniques to reduce the number of required bits per pixel to reduce file size of the image
+
+
+---
+
+### Optimizing raster images
+
+.img-wrap-80[![](../assets/img/performance-optimization/artifacts.png)]
+
+### Note:
+
+Left to right (PNG): 32-bit (16M colors), 7-bit (128 colors), 5-bit (32 colors). Complex scenes with gradual color transitions (gradients, sky, etc.) require larger color palettes to avoid visual artifacts such as the pixelated sky in the 5-bit asset. On the other hand, if the image only uses a few colors, then a large palette is simply wasting precious bits!
+
+---
+
+### Selecting the right image format
+
+- Start by selecting the right universal format: GIF, PNG, JPEG
+- Experiment and select the best settings for each format: quality, palette size, etc.
+- Consider adding WebP and JPEG XR assets for modern clients
+
+.img-wrap-70[![](../assets/img/performance-optimization/images-format-table.png)]
+
+
+---
+
+### Delivering scaled image assets
+
+- Delivering scaled assets is one of the simplest and most effective optimizations
+- Pay close attention to large assets as they result in high overhead
+- Reduce the number of unnecessary pixels by scaling your images to their display size
+
+.img-wrap-70[![](../assets/img/performance-optimization/resized-image.png)]
+
+---
+
+layout: false
+
+# Webfont optimization
+
+- [Anatomy of a webfont](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization#anatomy-of-a-webfont)
+- [Defining font family with @font-face](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization#defining-font-family-with-font-face)
+- [Optimizing loading and rendering](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization#optimizing-loading-and-rendering)
+- [Optimization checklist](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization#optimization-checklist)
+
+---
+
+# HTTP caching
+
+Fetching something over the network is both slow and expensive: large responses require many roundtrips between the client and server, which delays when they are available and can be processed by the browser, and also incurs data costs for the visitor. As a result, the ability to cache and reuse previously fetched resources is a critical aspect of optimizing for performance.
+
+- [Validating cached responses with ETags](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#validating-cached-responses-with-etags)
+- [Cache-Control](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#cache-control)
+- [Defining optimal Cache-Control policy](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#defining-optimal-cache-control-policy)
+- [Invalidating and updating cached responses](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#invalidating-and-updating-cached-responses)
+- [Caching checklist](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#caching-checklist)
+
+</textarea>
+<!-- ================== End of Slides ================== -->
+
+	<script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
+	<script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+</body>
+</html>
