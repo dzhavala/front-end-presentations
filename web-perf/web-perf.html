@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web performance potimization</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../assets/css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <img class="epam-logo" src="../assets/img/logo.png"/>
+        <h1>Web Performance Optimization</h1>
+    </header>
+
+<!-- ================== Slides ================== -->
+    <textarea id="source">
+
+
+class: center, middle
+
+.title[
+Front-end training
+# Web Performance Optimization
+]
+
+
+---
+
+
+# Web Performance Statistic
+
+72% of RWD sites whose small screen design weighs the same as the large screen design. Mobile first means performance first.
+
+## Unhappy users
+
+- 47% of consumers expect a web page to load in 2 seconds or less;
+- 78% of users say they’ve felt stress or anger while using a slow website;
+- 4% of people have thrown their phone while using a slow mobile site
+
+
+---
+
+
+# How fast is fast?
+
+- **< 100ms** feels instantaneous
+- **< 300ms** noticeable but still fast
+- **< 1000ms** computer is working
+- **+1s** mental context switch start
+- **+10s** I’ve got better things to do...
+
+
+---
+
+
+# Size by Content-Type
+
+Images are the devil. Consider using CSS, sprites, symbol fonts & SVG
+
+.center[![](assets/Screen-Shot-2014-05-26-at-15.20.14.jpg)]
+
+
+---
+
+
+# Image compression tools
+
+- [https://tinypng.com/](https://tinypng.com/)
+- [http://www.punypng.com/](http://www.punypng.com/)
+- [http://compresspng.com/](http://compresspng.com/)
+- [http://compressnow.com/](http://compressnow.com/)
+- [http://www.jpegmini.com/](http://www.jpegmini.com/)
+
+More tools for image optimization - [http://addyosmani.com/blog/image-optimization-tools/](http://addyosmani.com/blog/image-optimization-tools/)
+
+
+---
+
+
+# Anatomy of a web page loading
+
+- DNS resolution
+- TCP connection
+- Send request
+- Wait for response
+- Download response
+- Parse (DOM, CSSOM)
+- Request sub-resource
+- Execute JS/Apply CSS
+- Compose Layout
+- Render
+
+
+---
+
+
+#Network stages
+
+- **DNS Lookup** - Time to map the domain name (www.google.com) to an IP address
+- **Initial Connection** - Time to open a connection to the server and get an acknowledgement
+- **Wait Time** - Time between initial connection and the first byte of the response (time it takes the server to “cook” the page).
+- **Content Download** - Time it takes to download the content that the server has finished creating
+
+
+---
+
+
+# Network stages in Chrome Dev Tools
+<br>
+.columns[.col-50[
+  ![Network panel 1](assets/1.jpg)
+].col-50[
+  ![Network panel 2](assets/2.jpg)
+]]
+<br><br>
+.center[
+  ![Network panel 3](assets/3.jpg)
+]
+
+
+---
+
+
+# Network checklist
+
+- GZIP
+- Minify CSS & JS 
+- Combine CSS & JS
+- Cache static resources
+- Use a CDN
+- Optimize images
+- Sprite images
+- base64 images
+
+
+---
+
+
+# Life of a web page
+
+.center[![Life of a web page](assets/Screen-Shot-2014-05-26-at-15.27.42.jpg)]
+
+
+---
+
+
+# Evil dependencies
+
+- DOM construction can be blocked by JS download & execution.
+- JS execution can be blocked by CSS download & parsing.
+- Render Tree is also blocked by CSS. Browsers prefer to paint when they have all informations available.
+
+
+---
+
+
+# Async scripts
+
+- Defer and async attributes are a way to promise the browser your script doesn't contain doc.write()
+
+- Dynamic script insertion
+  ``` javascript
+    var p = document.getElementsByTag('body')[0],
+        s = createElement('script');
+    s.src = '/script.js';
+    p.appendChild(s);
+  ```
+- Scripts at the bottom
+
+
+---
+
+
+# Use efficient CSS selectors
+
+The following categories of rules are considered to be inefficient:
+
+- Rules with descendant selectors 
+``` css
+body * { }
+.hide-scrollbars * { }
+html #atticPromo ul li a { }
+```
+- Rules with child or adjacent selectors
+``` css
+body > * { }
+ul > li > a { }
+```
+
+- Rules that apply the :hover pseudo-selector to non-link elements for IE7 and IE8
+``` css
+    h3:hover { }
+    .foo:hover { }
+```
+
+
+---
+
+
+# PageSpeed Rules and Recommendations
+
+- Optimize JavaScript Use
+  - Prefer async JavaScript resources
+  - Defer parsing JavaScript
+  - Avoid long running JavaScript
+- Optimize CSS Use
+  - Put CSS in the document head
+  - Avoid CSS imports
+  - Inline render-blocking CSS
+
+
+---
+
+
+# Reﬂows & Repaints
+
+The render tree is the visual part of the DOM tree. So if you're hiding a div with display: none, it won't be represented in the render tree.
+Changing a property of a Render Tree node could trigger:
+
+- **Reﬂow** (or layout) - parts of the render tree will need to be revalidated and the node dimensions recalculated (resize window, font changes, height, scrollTop, etc).
+- **Repaint** (or redraw) - Once the render tree is constructed, the browser can paint (draw) the render tree nodes on the screen (changes in geometric properties of a node or stylistic change: color, visibility, outline)
+
+Repaints and reflows can be expensive, they can hurt the user experience, and make the UI appear sluggish.
+
+
+---
+
+
+# What triggers a reflow or a repaint
+
+- Adding, removing, updating DOM nodes
+- Hiding a DOM node with **`display: none;`** (reflow and repaint) or **`visibility: hidden;`** (repaint only, because no geometry changes)
+- Moving, animating a DOM node on the page
+- Adding a stylesheet, tweaking style properties
+- User action such as resizing the window, changing the font size, or scrolling
+
+
+---
+
+
+# Reflow and repaint examples:
+
+``` javascript
+var bodyStyle = document.body.style; // cache
+ 
+bodyStyle.padding = "20px"; // reflow, repaint
+bodyStyle.border = "10px solid red"; // another reflow and a repaint
+ 
+bodyStyle.color = "blue"; // repaint only, no dimensions changed
+bodyStyle.backgroundColor = "#fad"; // repaint
+ 
+bodyStyle.fontSize = "2em"; // reflow, repaint
+ 
+// new DOM element - reflow, repaint
+document.body.appendChild(document.createTextNode('Hello'));
+```
+
+
+---
+
+
+# Minimizing repaints and reflows
+
+Batch DOM changes and perform them not in the live DOM tree. You can:
+
+- use a documentFragment to hold temp changes;
+- clone the node you're about to update, work on the copy, then swap the original with the updated clone;
+- hide the element with display: none (1 reflow, repaint), add 100 changes, restore the display (another reflow, repaint). This way you trade 2 reflows for potentially a hundred.
+
+Don't ask for computed styles excessively. If you need to work with a computed value, take it once, cache to a local var and work with the local copy.
+
+Using absolute positioning makes element a child of the body in the render tree, so it won't affect too many other nodes when you change it's styles.
+
+
+---
+
+
+# CSS Transitions & Animations
+
+- Oﬄoad to GPU
+- Multithreaded
+- Subpixel rendering
+
+
+---
+
+
+# Tools
+
+- webpagetest.org [http://webpagetest.org](http://webpagetest.org)
+- YSlow [http://developer.yahoo.com/yslow/](http://developer.yahoo.com/yslow/)
+- PageSpeed [http://code.google.com/speed/page-speed/](http://code.google.com/speed/page-speed/)
+
+
+---
+
+# Related resources
+- Chrome Dev Tools Overview [https://developer.chrome.com/devtools](https://developer.chrome.com/devtools)
+- Jank Free [http://jankfree.org/](http://jankfree.org/)
+- Website Performance Optimization. [Udacity cource](https://www.udacity.com/course/ud884)
+- Mobile Web Development [Udacity cource](https://www.udacity.com/course/cs256)
+- Web Fundamentals. Optimizing Performance[https://developers.google.com/web/fundamentals/performance/](https://developers.google.com/web/fundamentals/performance/)
+    </textarea>
+<!-- ================== End of Slides ================== -->
+
+    <script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+</body>
+</html>

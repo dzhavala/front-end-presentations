@@ -171,3 +171,6 @@ a {
         color: #77addf;
     }
 
+img {
+    max-width: 100%; 
+}
