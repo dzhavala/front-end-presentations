@@ -417,10 +417,10 @@ p {
 # Selectors. Classes
 ``` html
 <style>
-   p { text-align: justify; }
+   p { color: #009; }
    p.cite {
     margin-left: 20px;
-    border-left: 1px solid navy;
+    border-left: 1px solid red;
     padding-left: 15px;
    }
    .article { font-size: 11px; }
@@ -435,12 +435,12 @@ p {
 <style>
   .demo-2 p {
     font-size: 16px;
-    text-align: justify;
+    color: #009;
     margin: 0 0 .7rem;
    }
   .demo-2 p.cite {
     margin-left: 20px;
-    border-left: 1px solid navy;
+    border-left: 1px solid red;
     padding-left: 15px;
    }
   .demo-2 .article {
@@ -463,7 +463,7 @@ p {
 <style>
   #help {
     width: 520px;
-    padding: 5px;
+    padding: 100px;
     background: #fc0;
    }
 </style>
@@ -477,7 +477,7 @@ p {
 <style>
   #help {
     width: 520px;
-    padding: 5px;
+    padding: 10px;
     background: #fc0;
    }
 </style>
@@ -551,11 +551,11 @@ p {
 ``` html
 <style>
  b + i {
-  color: red;
+  color: yellow;
  }
 </style>
 
-<p>Lorem <b>ipsum </b> dolor sit amet, <i>consectetuer</i> adipiscing elit.</p>
+<p>Lorem <b>ipsum </b> dolor sit amet, <i>"first i"</i> adipiscing <i>"second i"</i> elit.</p>
 ```
 &nbsp;
 .demo.demo-3[
@@ -565,7 +565,7 @@ p {
  }
 </style>
 
-<p>Lorem <b>ipsum </b> dolor sit amet, <i>consectetuer</i> adipiscing elit.</p>
+<p>Lorem <b>ipsum </b> dolor sit amet, <i>"first i"</i> adipiscing <i>"second i"</i> elit.</p>
 ]
 
 
@@ -578,17 +578,23 @@ p {
 ``` html
 <style>
   h2 {
-    margin-top: 1em;
+    color: green;
+    margin-top: 0;
   }
   h1 + h2 {
-    margin-top: -10px;
+    margin-top: 30px;
+  }
+  p .name{
+    outline: dotted #333 1px;
   }
   p > .name {
     color: red;
-  }
+  }  
 </style>
 
 <h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h2>Heading 2</h2>
 <h2>Heading 2</h2>
 <p>
   Lorem <i class="name">ipsum</i> dolor <span>sit
@@ -600,22 +606,28 @@ p {
 <style>
   .demo-4 h1 {
     font-family: Arial;
-      color: #333;
-  }
-  .demo-4 h2 {
-    margin-top: 1em;
-    font-family: Arial;
     color: #333;
   }
+  .demo-4 h2 {
+    margin-top: 0;
+    font-family: Arial;
+    color: green;
+  }
   .demo-4 h1 + h2 {
-    margin-top: -10px;
+    margin-top: 30px;
+    color: blue;
   }
   .demo-4 p > .name {
     color: red;
   }
+  .demo-4 p .name{
+    outline: dotted #333 1px;
+  }
 </style>
 
 <h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h2>Heading 2</h2>
 <h2>Heading 2</h2>
 <p>Lorem <i class="name">ipsum</i> dolor <span>sit <i class="name">amet</i></span></p>
 ]]
@@ -628,7 +640,6 @@ p {
 
 ``` html
 <style>
-
 q[title] {
   color: maroon;
 }
@@ -639,10 +650,10 @@ a[target="_blank"] {
 </style>
 
 <q title="Some title text">Lorem ipsum dolor sit amet, consectetur adipisicing elit</q>
-
+<p><a href="#link" >Посилання</a></p>
 <p><a href="#link" target="_blank">Посилання відкриється в новому вікні</a></p>
 ```
-&nbsp;
+
 .demo.demo-5[
 <style>
 .demo-5 q[title] {
@@ -655,10 +666,9 @@ a[target="_blank"] {
 </style>
 
 <q title="Some title text">Lorem ipsum dolor sit amet, consectetur adipisicing elit</q>
-
+<p><a href="#link" >Посилання</a></p>
 <p><a href="#link" target="_blank">Посилання відкриється в новому вікні</a></p>
 ]
-
 
 
 ---
@@ -670,7 +680,7 @@ a[target="_blank"] {
 ``` css
 /* Attribute value starts with some text */
 a[href^="http://" ] {
-  font-weight: bold
+  color: red;
 }
 /* If link ends with ".ru" */
 a[href$=".com"] {
@@ -687,7 +697,7 @@ a[href$=".com"] {
 ```
 ].col-40.demo.demo-6[
 <!-- hardcoded style values here due to markdown quotes escaping bug -->
-<p><a style="font-weight: bold" href="http://mail.ru" target="_blank">External link to mail.ru</a></p>
+<p><a style="color: red" href="http://mail.ru" target="_blank">External link to mail.ru</a></p>
 <p><a style="background: #fc0;" href="http://www.yandex.com">Yandex.com</a></p>
 <p><a style="background: yellow;" href="http://google.ru">Search the web</a></p>
 <h3 title="block tag"  style="color: green;">Heading</h3>
@@ -742,28 +752,28 @@ a[href$=".com"] {
 ```
 
 &nbsp;
-.demo[
+.demo.demo-xx[
 <style>
- a:link {
-  color: #036; /* The color of not visited links */
+ .demo-xx a:link {
+  color: #069;
  }
- a:hover {
-  color: #f00; /* The color of links on mouse pointer hovering */
+ .demo-xx a:hover {
+  color: #f00;
  }
- a:visited {
-  color: #606; /* The color of visited links */
+ .demo-xx a:visited {
+  color: #606;
  }
- a:visited:hover {
-  color: #303; /* The color of not visited links on hover */
+ .demo-xx a:visited:hover {
+  color: #303;
  }
- a:active {
-  color: #ff0; /* The color of active links */
+ .demo-xx a:active {
+  color: #ff0;
  }
- b:first-child {
-   color: red; /* The color of the first tag */
+ .demo-xx b:first-child  {
+   color: red;
  }
- b:last-child {
-   color: green; /* The color of the last tag */
+ .demo-xx b:last-child {
+   color: green;
  }
 </style>
 <p><b>Lorem ipsum</b> dolor sit <a href="1.html">Link</a> amet, <b>consectetuer</b> adipiscing <b>elit</b>, sed diem nonummy nibh eut lacreet dolore magna <b>aliguam</b> erat volutpat.</p>
@@ -781,15 +791,15 @@ a[href$=".com"] {
 <style>
  p:before {
   content: "";
-  width: 5px;
-  background: #fc0;
+  display: inline-block;
+  width: 20px;
+  height: 1em;
+  margin-right: 10px; 
+  background: #f3c;
  }
  p:after {
   content: " - a Rule";
-  font-style: italic;
- }
- p:first-letter {
-  color: red;
+  color: #666;
  }
 </style>
 ```
@@ -803,15 +813,15 @@ a[href$=".com"] {
 <style>
  .demo-7 p:before {
   content: "";
-  width: 5px;
-  background: #fc0;
+  display: inline-block;
+  width: 20px;
+  height: 1em;
+  margin-right: 10px; 
+  background: #f3c;
  }
  .demo-7 p:after {
   content: " - a Rule";
-  font-style: italic;
- }
- .demo-7 p:first-letter {
-  color: red;
+  color: #666;
  }
 </style>
 
@@ -840,26 +850,28 @@ h1 {
 
 # Inheritance
 
-.columns[.col-60[
+.columns[.col-50[
 ``` css
 <style>
- body {
+body {
   font-family: Arial, Helvetica, sans-serif;
   color: navy;
 }
 
-p {
+div {
   color:black;
 }
 
-p.red {
+div.red {
   color: red;
 }
 </style>
 ```
-].col-40[
+].col-50[
 ``` html
-<p class="red">Hello, i’m red!</p>
+Hello
+<div>Hello, i’m div!</div>
+<div class="red">Hello, i’m red!</div>
 ```
 ]]
 <br><br>
@@ -867,17 +879,21 @@ p.red {
 <style>
  .demo-8 {
   font-family: Arial, Helvetica, sans-serif;
-  color: navy;
+  color: green;
 }
 .demo-8 p {
+  margin: 0;
+}
+.demo-8 div {
   color:black;
 }
-.demo-8 p.red {
+.demo-8 div.red {
   color: red;
 }
 </style>
 
-<p class="red">Hello, i’m red!</p>
+Hello<div>Hello, i’m div!</div>
+<div class="red">Hello, i’m red!</div>
 ]
 
 
