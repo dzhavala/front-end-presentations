@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Front End Lab</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/shCore.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/shThemeDefault.css" />
+    <script type="text/javascript" src="assets/js/lib/shCore.js"></script>
+    <script type="text/javascript" src="assets/js/lib/shBrushJScript.js"></script>
+    <script type="text/javascript" src="assets/js/lib/shAutoloader.js"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+</head>
+<body>
+    <header>
+
+        <img class="epam-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAUCAYAAAAa2LrXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0QjQwQjM1QzI4NzQxMUU0QjAzOUUxRTYzMjc2NDcxRiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0QjQwQjM1RDI4NzQxMUU0QjAzOUUxRTYzMjc2NDcxRiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY2Q0Q3M0Y1Mjg3MjExRTRCMDM5RTFFNjMyNzY0NzFGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY2Q0Q3M0Y2Mjg3MjExRTRCMDM5RTFFNjMyNzY0NzFGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+ZE2tUQAABZRJREFUeNrcmHlsVFUUxl/3RaQtbaHalqUREAWNGq2IC/iHgAsKuEVj0SoxLjFqIm4RATXBfwSNGKOCEbRRKGICRAxRqixSggKmTaEtUEULlFq6TKUM0xm/q99Lbr7cmQKtJHKSX9o577zlnnu297xIJOL1ISPAYlAH2kEXaAQrwRjaTAC7QBX4EswHtSAE6sFrIMu65lhQBg6AYyAA9oAFIJ82M3jPSvATWAFW0dZcdykYBeaCw5F/ZTeY1Ns199Zh14BZII0P2BaJLs0gFzwa6VnKef3be7D7kXaLIqcnLaAQ3AkeAYmn6oN479RlJHgRbAObwZMgDF4B/S27crDd+p0NJoF0ud5GsEx0OSAFzLZ0XbRrtHTF4EqQLOd/DypEdxR8B/6ydGk8927wIajh2i44aW+cpKdHghfAFhCUXdxEm72WrgOkMzptuR+8JbrLwTDRfQWKeB1fVvA+FZauG4wD38j5yaBUdLNBAjhk6f5g9lSI7XGwDkwFKbF8kxjDt2YXbgXTwLUgLordFlAAci1dLQiB4WLbQltb/gRDRHeAkdpPoso8wzCxa5JrHgdBkCfX/J3RNsjSHQHHHGszdhPJQbAELAe/6OI1hQvBU+AHhvMCcJ3jBlXgVXAFmAVGgXOt47vBCXFgBxd2vp0AIMD7qgPHiG4XyASDLd1BOjrH0tVba7GlUZxvpI1/bwZTwGo+ty3ngZfBDrABPGhvrInAgeAOMB1MAElRIm0/WAtWMhoi4nhPomCIPHCz9UB2VAS5ARqpVdzA/XTQZWCe2B3mGrLFUUniaN/ZmhF7+beTzlvNtZSAu8ClEmzjyZvgc/CxyeOXHN0pzPZvasR7HD2SY9SCOXJ+gLUmbOnMiHE1j/mymXWpTM6fbl37QrCEI5HK+3w2WxaxrlVbOjNSFYBnxXZujDXFs74u5FqCjvtvj3eksce6MBPkg8cZusEY9TJDfp/DWhMnKZzJY76Y+tUtaW1+N/D/d1lKHmJXVtkDhjrS32Nm+dLKaC0S26YYawpzynia9fRth01CoqSiL+Zhn2FqLZdxxCW6iM9Ys3J5feO0pWC02P3GvxfJYneCheAJSz+HDiixdHUcY2zZxyaQI+XD1LaLxbauh3WZTbgN3ALGRnPgt+y0Jt8T/AMs4obnQCVnsHLupC2JstvdrBGD2b0CnA8rZU60I2CAo4HcZ+mqweuMSE+cPUh0zTIR+Hae1Eq/C6uYZjiZTpsqzdGTRvmOWfxWdlMTbfeCGY6xopi8QYcvBuu5qwNkjGgHh9iUBlrOTXcstpbRlyDOyhcn1HNjiqXMdElT8njvS0RXzXKSJR34KP83TecmcA+H/dwoTjOl5VOwilkStutfDUeTIqulBx21bhq78T52pDRxTBN3drQj2rId9arQkdapUSLVtg3wrSJPNq/VEQANrLMZcu8Ay4Q5vgY84HCeybgPOKGM4BvXz6yRzkE6bLX0fI44M6Wle4y6CRxFUiQykh31pk2aRZjD9lWOFNSo6uD9+olT0sWpLTx/qKPZFEg61vB686SE+M9qHFoGNnFjevUqZyjmOHHEauOlPNZp6UKOkWMNv5w0iN58XTkhusmODw5BxxixDNwguq18ng2iN6PQFNGZV8o867dZw1p+2cn4Lz4mmCZQyjAu4WuNn+LP251JInInx5CQpFY37ewsMPX4a55jSxJrWEQGY33+dis7tDMXOmplf6bjY3x1NY3jE+sNpUeJ++ebVt/IcDahLC6sk+G/ns4bz3nSF/O1ZD64nqlUzfGnk8fHsXyk0jHrOJpk0vEbWcMmspmk0vHb+BaRySYXYuE3NflGNo4Mzng7uIGh0110XzqwJ3kYfGT9/oIO/19L/Bm8l74F/OqdBZJ4Bu/VyXmulV2v8mxw4N8CDADXFYNPYlfknAAAAABJRU5ErkJggg=="/>
+
+        <h1>Front End Lab</h1>
+
+    </header>
+<!-- ================== Slides ================== -->
+    <textarea id="source">
+.main-index[
+1. intro
+1. [HTML Basics](html/html.html)
+1. [HTML5](html5/html5.html)
+1. [CSS Basics](css-basics/css-basics.html)
+1. [CSS Layouts](css-layouts/css-layouts.html)
+1. [Forms](forms/forms.html)
+1. [Responsive Layouts](responsive-design/responsive-design.html)
+1. css3
+1. [HTML/CSS Performance](web-perfomance/web-perf.html)
+1. [HTML/CSS Tools](html-css-tools/html-css-tools.html)
+1. [Intro to JS](intro-to-js/index.html)
+1. [JS Basics](control-flow/index.html)
+1. [Functions (pt.1)](functions/functions.html)
+1. [JS Data Types](datatypes/datatypes.html)
+1. [DOM Manipulation](dom/dom.html)
+1. [BOM](bom/bom.html)
+1. [Functions (pt.2)](functions/functions2.html)
+1. [Intro to OOP](oop/oop.html)
+1. [Inheritance in JS](inheritance/prototypes.html)
+1. [AJAX](ajax/ajax.html)
+1. [jQuery](jquery/index.html)
+1. [JavaScript tools](tooling/tooling.html)
+1. [templates](templates/templates.html)
+1. js patterns
+1. mvc
+1. perf optimization
+1. [JS Modules](modules/index.html)
+1. backbone
+1. [Angular.js](angular/index.html)
+1. [EcmaScript6: Harmony](es6/es6.html)
+]
+    </textarea>
+<!-- ================== End of Slides ================== -->
+
+    <script src="assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+</body>
+</html>
