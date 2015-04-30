@@ -67,13 +67,13 @@ jQuery accepts all css 2, 3 selectors and even more
 ### Filters
 `:even, :odd, :first, :last, :not(), :empty`
 
-`:gt()` - all elements at an index greater then specified
-`:lt()` - all elements at an index less then specified
-`:hidden` - display: none, type="hidden", width & height = 0, ancestor is hidden
-`:visible` - are visible
-`:parent` - are parents to other elements, including text node
-`:contains()` - contain the specified **text**
-`:has()` - contain at least one element that matches the specified **selector**
+`:gt()` - all elements at an index greater then specified  
+`:lt()` - all elements at an index less then specified  
+`:hidden` - display: none, type="hidden", width & height = 0, ancestor is hidden  
+`:visible` - are visible  
+`:parent` - are parents to other elements, including text node  
+`:contains()` - contain the specified **text**  
+`:has()` - contain at least one element that matches the specified **selector**  
 
 ---
 
@@ -89,7 +89,7 @@ jQuery accepts all css 2, 3 selectors and even more
 :nth-last-of-type(), :nth-of-type()`
 
 ### Forms
-`:button, :checkbox, :file, :image, :input, :password, :radio, :reset, :submit, :text`
+`:button, :checkbox, :file, :image, :input, :password, :radio, :reset, :submit, :text`  
 `:disabled, :enabled, :focus, :checked, :selected`
 
 ---
@@ -100,10 +100,10 @@ Though traversing is quite a powerfull tool, it is wiser not to abbuse it too mu
 Overcomplicated selectors are hard to understand and affect performance.
 Note: `find()` is an exception, sometimes gives performance benefits
 
-`is(), not(), has()`
-`eq(), first(), last()`
-`find(), parent(), parents()`
-`children(), prev(), next(), closest(), siblings()`
+`is(), not(), has()`  
+`eq(), first(), last()`  
+`find(), parent(), parents()`  
+`children(), prev(), next(), closest(), siblings()`  
 `add(), addBack(), contents()`
 
 and a few more...
@@ -116,7 +116,7 @@ For convenience, some of these methods work as both getters and setters.
 Note: some methods work with only one element
 
 ### Attributes
-`attr(), prop(), val()`
+`attr(), prop(), val()`  
 `removeAttr(), removeProp()`
 
 Note: as lots of other methods, could be used as both getters and setters
@@ -126,8 +126,8 @@ $('input').attr('disabled', true); // [<input type="text" disabled="disabled">]
 ```
 
 ### CSS
-`css()` - sets inline style. ( { 'top' : 5, 'right' : 4 } ) or ( 'top', 5 )
-`addClass(), removeClass(), hasClass()`
+`css()` - sets inline style. ( { 'top' : 5, 'right' : 4 } ) or ( 'top', 5 )  
+`addClass(), removeClass(), hasClass()`  
 `toggleClass()` - $(element).hasClass(class) ? removeClass(class) : addClass(class)
 
 ---
@@ -158,12 +158,12 @@ and a few more...
 
 # Animation
 
-`hide(), show(), toggle()`
-`fadeOut(), fadeIn(), fadeToggle()`
-`slideOut(), slideDown(), slideToggle()`
+`hide(), show(), toggle()`  
+`fadeOut(), fadeIn(), fadeToggle()`  
+`slideOut(), slideDown(), slideToggle()`  
 Note: all of these methods accept configurations, e.g {duration: 500}
 
-`animate` - animates given css properties.
+`animate` - animates given css properties.  
 Note: in most cases it is wiser to use css animations as those are much faster
 
 ---
@@ -185,8 +185,8 @@ Note: in most cases it is wiser to use css animations as those are much faster
 ### Event Object
 `event.preventDefault(), event.stopPropagation(), event.target`
 
-Note: some events can be used as both handlers and triggers
-`$('input').focus(handler)` -> attaches handler onFocus
+Note: some events can be used as both handlers and triggers  
+`$('input').focus(handler)` -> attaches handler onFocus  
 `$('input').focus()` -> sets focus on input
 
 ---
@@ -206,19 +206,19 @@ $.ajax({
 ```
 
 ### Shorthand methods
-`$.get(), $.post()`
+`$.get(), $.post()`  
 `$.getJSON(), $.getScript()`
 
 ---
 
 # Deferred Object
 
-`$.Deferred()` - constructor function to create deferred objects
-`$.when()` - provide a way to execute callbacks based on one or more deferred objects
-`deferred.resolve()` - resolve and optionally pass data
-`deferred.reject()` - reject and optionally pass error
-`deferred.done()` - fires when deferred object is resolved
-`deferred.fail()` - fires when deferred object is rejected
+`$.Deferred()` - constructor function to create deferred objects  
+`$.when()` - provide a way to execute callbacks based on one or more deferred objects  
+`deferred.resolve()` - resolve and optionally pass data  
+`deferred.reject()` - reject and optionally pass error  
+`deferred.done()` - fires when deferred object is resolved  
+`deferred.fail()` - fires when deferred object is rejected  
 `deferred.always()` - either resolved or rejected
 
 ### Usage
@@ -247,15 +247,15 @@ $.when($.getJSON('users.json'), $.getJSON('rights.json'))
 
 `$.trim()` - remove whitespace from the beginning and end of a string
 
-`$.isArray(), $.isEmptyObject(), $.isFunction(), $.isNumeric()`
+`$.isArray(), $.isEmptyObject(), $.isFunction(), $.isNumeric()`  
 `$.parseHTML(), $.parseJSON(), $parseXML()`
 
 ---
 
 # jQuery Plugins
 
-One of the reasons jQuery gained so much popularity is the ease of creating plugins.
-Which led to a huge collection of available plugins.
+One of the reasons jQuery gained so much popularity is the ease of creating plugins.  
+Which led to a huge collection of available plugins.  
 As a tradeoff, lots of those plugins are poorly coded and rarely properly maintained.
 
 ``` js
